@@ -1,0 +1,39 @@
+atividade de C#
+ex 1:
+
+using System;
+
+namespace CalculadoraIdade
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Digite sua data de nascimento (no formato dd/mm/aaaa):");
+            string dataNascimentoStr = Console.ReadLine();
+
+            if (DateTime.TryParseExact(dataNascimentoStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataNascimento))
+            {
+                int idade = CalcularIdade(dataNascimento);
+                Console.WriteLine($"Sua idade é: {idade} anos.");
+            }
+            else
+            {
+                Console.WriteLine("Formato de data inválido.");
+            }
+        }
+
+        static int CalcularIdade(DateTime dataNascimento)
+        {
+            DateTime dataAtual = DateTime.Now;
+            int idade = dataAtual.Year - dataNascimento.Year;
+
+            if (dataAtual.Month < dataNascimento.Month || (dataAtual.Month == dataNascimento.Month && dataAtual.Day < dataNascimento.Day))
+            {
+                idade--;
+            }
+
+            return idade;
+        }
+    }
+}
