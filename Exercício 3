@@ -1,0 +1,104 @@
+ex 3:
+3.1:
+
+using System;
+
+namespace NumeroInteiro
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Digite um numero inteiro:");
+            string num = Console.ReadLine();
+            
+            Console.WriteLine("O numero digitado foi: " + num);
+        }
+    }
+}
+****************************************************************************************************************************************************************************
+3.3:
+
+using System;
+
+namespace NomeSobrenome
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Digite seu nome:");
+            string nome = Console.ReadLine();
+
+            Console.WriteLine("Digite seu sobrenome:");
+            string sobrenome = Console.ReadLine();
+
+            string nomeCompleto = nome + " " + sobrenome;
+            Console.WriteLine("Nome completo: " + nomeCompleto);
+        }
+    }
+}
+****************************************************************************************************************************************************************************
+3.4:
+
+using System;
+namespace Tabuada
+{
+	class Program
+	{
+	  staic void Main(string[] args)
+	{
+	  Console.WriteLine("Digite um numero: ");
+	  int numero = Convert.ToInt32(Console.ReadLine());
+	  for (int i = 0; i <= 10; i++)
+	  {
+	   Console.WriteLine.(numero + " x " + i + " = " + (numero * i));
+	  }
+	}
+	}
+}
+****************************************************************************************************************************************************************************
+3.5:
+
+
+******************************************************************************************************************************************************************************
+3.6:
+
+using System;
+
+namespace SomaValores
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Digite o primeiro valor:");
+            if (double.TryParse(Console.ReadLine(), out double valor1))
+            {
+                Console.WriteLine("Digite o segundo valor:");
+                if (double.TryParse(Console.ReadLine(), out double valor2))
+                {
+                    double soma = valor1 + valor2;
+
+                    if (valor1 == valor2)
+                    {
+                        double triploDaSoma = 3 * soma;
+                        Console.WriteLine($"Os valores são iguais. O triplo da soma é: {triploDaSoma}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"A soma dos valores é: {soma}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Segundo valor inválido. Certifique-se de digitar um número válido.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Primeiro valor inválido. Certifique-se de digitar um número válido.");
+            }
+        }
+    }
+}
