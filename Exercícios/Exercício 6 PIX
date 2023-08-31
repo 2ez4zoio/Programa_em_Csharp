@@ -1,0 +1,65 @@
+using System;
+
+class Program
+{
+    static void Main(){
+        
+        double saldoMatheus = 1000.00;
+        double saldoAna = 1000.00;
+        
+        while(true){
+            
+            Console.WriteLine("Bem vindo");
+            Console.WriteLine("Deseja realizar uma transferencia PIX?");
+            Console.WriteLine("1 - Realizar transferencia");
+            Console.WriteLine("2 - Sair");
+            
+            int escolha = Convert.ToInt32(Console.ReadLine());
+
+            Console.ReadLine();
+            
+            if (escolha == 1){
+                
+                Console.WriteLine("Digite o nome do destinatario:");
+                string destinatario = Console.ReadLine();
+                
+                if (destinatario.ToLower() == "matheus" || destinatario.ToLower() == "ana"){
+                    
+                    Console.WriteLine("Digite o valor da transferencia: ");
+                    double valorTransferencia = Convert.ToDouble(Console.ReadLine());
+                    
+                    if (valorTransferencia <= 0){
+                        Console.WriteLine("O valor tem que ser maior que zero.");
+                    }
+                    else if (valorTransferencia > saldoMatheus || valorTransferencia > saldoAna){
+                        Console.WriteLine("Saldo insuficiente");
+                    }
+                    else{
+                        if (destinatario.ToLower() == "matheus"){
+                            saldoMatheus -= valorTransferencia;
+                            saldoAna += valorTransferencia;
+                        }
+                        else{
+                            saldoAna -= valorTransferencia;
+                            saldoMatheus += valorTransferencia;
+                        }
+                        
+                        Console.WriteLine($"Transferencia de {valorTransferencia:C2} para {destinatario} realizada com sucesso\n");
+                        Console.WriteLine($"Saldo atual de Matheus: {saldoMatheus:C2}");
+                        Console.WriteLine($"Saldo atual de Ana: {saldoAna:C2}");
+                    }
+                }
+                else{
+                    Console.WriteLine("Destinatario nao encontrado. Tente novamente.");
+                }
+            }
+            else if (escolha == 2){
+                Console.WriteLine("Obrigado por usar o sistema de Transferencia PIX.");
+                break;
+            }
+            else{
+                Console.WriteLine("Opcao invalida. Por favor tente novamente.");
+            }
+        }
+    }
+}
