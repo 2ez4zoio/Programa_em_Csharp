@@ -1,0 +1,26 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Digite seu nome completo: ");
+        string nomeCompleto = Console.ReadLine();
+
+        Console.Write("Digite sua idade: ");
+        string idadeStr = Console.ReadLine();
+        int idade = Convert.ToInt32(idadeStr);
+
+        Console.WriteLine($"Nome completo em maiusculas: {nomeCompleto.ToUpper()}");
+        Console.WriteLine($"Nome completo em minusculas: {nomeCompleto.ToLower()}");
+        int numCaracteres = nomeCompleto.Replace(" ", "").Length;
+        Console.WriteLine($"Numero de caracteres no nome completo (sem espaços): {numCaracteres}");
+
+        int anoNascimento = 2023 - idade;
+        Console.WriteLine($"Ano de nascimento estimado: {anoNascimento}");
+
+        int idadeAoCompletar100 = 100 - idade;
+        int anoAoCompletar100 = 2023 + idadeAoCompletar100;
+        Console.WriteLine($"Voce tera 100 anos em: {anoAoCompletar100}");
+    }
+}
