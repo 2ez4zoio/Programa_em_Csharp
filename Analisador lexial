@@ -1,0 +1,74 @@
+"""
+
+E -> E + E
+E -> E - E
+E -> E * E
+E -> E / E
+E -> ( E )
+E -> id
+
+"""
+
+from ply import lex, yacc
+
+# Lista de nomes de tokens
+tokens = (
+    'ID', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN'
+)
+
+# Expressões regulares para tokens simples
+t_PLUS    = r'\+'
+t_MINUS   = r'-'
+t_TIMES   = r'\*'
+t_DIVIDE  = r'/'
+t_LPAREN  = r'\('
+t_RPAREN  = r'\)'
+
+# Uma expressão regular mais complicada para identificadores (IDs)
+t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+# Ignora espaços e tabs
+t_ignore  = ' \t'
+
+# Regra para lidar com erros
+def t_error(t):
+    print("Você inseriu um caractere inválido: '%s'" % t.value[0])
+
+
+# Construir o lexer
+lexer = lex.lex()
+
+# Regras da gramática
+def p_expression_binop(p):
+    '''expression : expression PLUS expression
+                  | expression MINUS expression
+                  | expression TIMES expression
+                  | expression DIVIDE expression'''
+    p[0] = (p[2], p[1], p[3])
+
+def p_expression_group(p):
+    'expression : LPAREN expression RPAREN'
+    p[0] = p[2]
+
+def p_expression_id(p):
+    'expression : ID'
+    p[0] = p[1]
+
+def p_error(p):
+    print("Erro sintático na entrada!")
+
+parser = yacc.yacc()
+
+def check_string(s):
+    try:
+        result = parser.parse(s)
+        if result:
+            print("A cadeia pertence à linguagem.")
+        else:
+            print("A cadeia NÃO pertence à linguagem.")
+    except Exception as e:
+        print("Erro:", e)
+
+# Teste
+s = input("Insira a cadeia para verificação: ")
+check_string(s)
