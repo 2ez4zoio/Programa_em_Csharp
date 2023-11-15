@@ -1,0 +1,60 @@
+using System;
+using System.Text.RegularExpressions;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Digite um CPF (apenas dígitos): ");
+        string cpf = Console.ReadLine();
+
+        if (ValidarCPF(cpf))
+        {
+            Console.WriteLine("CPF válido!");
+        }
+        else
+        {
+            Console.WriteLine("CPF inválido!");
+        }
+    }
+
+    static bool ValidarCPF(string cpf)
+    {
+        // Padrão de expressão regular para validar CPF
+        string padraoCPF = @"^\d{11}$";
+
+        // Verifica se o CPF tem 11 dígitos
+        if (Regex.IsMatch(cpf, padraoCPF))
+        {
+            // Calcula os dígitos verificadores
+            int[] digitos = new int[11];
+            for (int i = 0; i < 11; i++)
+            {
+                digitos[i] = int.Parse(cpf[i].ToString());
+            }
+
+            int soma1 = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                soma1 += digitos[i] * (10 - i);
+            }
+
+            int resto1 = soma1 % 11;
+            int digitoVerificador1 = (resto1 < 2) ? 0 : (11 - resto1);
+
+            int soma2 = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                soma2 += digitos[i] * (11 - i);
+            }
+
+            int resto2 = soma2 % 11;
+            int digitoVerificador2 = (resto2 < 2) ? 0 : (11 - resto2);
+
+            // Verifica se os dígitos verificadores calculados são iguais aos fornecidos
+            return digitos[9] == digitoVerificador1 && digitos[10] == digitoVerificador2;
+        }
+
+        return false;
+    }
+}
